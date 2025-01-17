@@ -1,5 +1,6 @@
 package api_tests;
 
+import dataObject.AlertsAndMessages;
 import endpoints.AccountsPage;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -10,19 +11,18 @@ import utils.BaseAuth;
 
 import static dataObject.StatusCodesData.BED_REQUEST_400;
 import static dataObject.StatusCodesData.CREATED_201;
+import static dataObject.UserData.*;
 
 public class AccountsTest extends BaseAuth {
-
     @Test
     public void postUserAccountWithValidPassword() {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("userName", "ANNA1234");
-        requestBody.put("password", "Asdasd@1234");
+        requestBody.put("userName", userName_1);
+        requestBody.put("password", password);
 
         Response response = RestAssured
                 .given()
-                .header("connection", "keep-alive")
-                .header("content-type", "application/json; charset=utf-8")
+                .headers(headerConfig.getHeaders())
                 .body(requestBody.toString())
                 .when()
                 .post(AccountsPage.POST_ACCOUNT_USER)
@@ -41,13 +41,12 @@ public class AccountsTest extends BaseAuth {
     @Test
     public void postUserAccountWithInvalidPassword() {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("userName", "ANN1234");
-        requestBody.put("password", "asdasd1234");
+        requestBody.put("userName", userName_2);
+        requestBody.put("password", invalidPassword);
 
         Response response = RestAssured
                 .given()
-                .header("connection", "keep-alive")
-                .header("content-type", "application/json; charset=utf-8")
+                .headers(headerConfig.getHeaders())
                 .body(requestBody.toString())
                 .when()
                 .post(AccountsPage.POST_ACCOUNT_USER)
@@ -56,8 +55,7 @@ public class AccountsTest extends BaseAuth {
 
         int statusCode = response.getStatusCode();
         String actualMessage = response.jsonPath().getString("message");
-        String expectedMessage = "Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), " +
-                "one lowercase ('a'-'z'), one special character and Password must be eight characters or longer.";
+        String expectedMessage = AlertsAndMessages.passwordValidationErrorMessage;
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(statusCode, BED_REQUEST_400.getValue(), "Incorrect error status code!");
