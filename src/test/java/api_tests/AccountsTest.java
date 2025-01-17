@@ -16,7 +16,7 @@ public class AccountsTest extends BaseAuth {
     @Test
     public void postUserAccountWithValidPassword() {
         JSONObject requestBody = new JSONObject();
-        requestBody.put("userName", "ANNA1234ll");
+        requestBody.put("userName", "ANNA1234");
         requestBody.put("password", "Asdasd@1234");
 
         Response response = RestAssured
