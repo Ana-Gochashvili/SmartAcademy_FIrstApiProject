@@ -5,7 +5,8 @@ import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseAuth {
-    public  HeadersConfiguration headerConfig;
+    public HeadersConfiguration headerConfig;
+
     @BeforeMethod
     public void setBaseURL() {
         RestAssured.baseURI = "https://bookstore.toolsqa.com/";
