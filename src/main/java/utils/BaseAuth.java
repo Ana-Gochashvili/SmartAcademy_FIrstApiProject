@@ -1,6 +1,7 @@
 package utils;
 
 import dataObject.HeadersConfiguration;
+import endpoints.Endpoint;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
 
@@ -9,7 +10,7 @@ public class BaseAuth {
 
     @BeforeMethod
     public void setBaseURL() {
-        RestAssured.baseURI = "https://bookstore.toolsqa.com/";
+        RestAssured.baseURI = Endpoint.Base_URL;
         headerConfig = new HeadersConfiguration();
     }
 }

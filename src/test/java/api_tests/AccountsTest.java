@@ -1,6 +1,7 @@
 package api_tests;
 
 import dataObject.AlertsAndMessages;
+import endpoints.Endpoint;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.json.JSONObject;
@@ -11,7 +12,6 @@ import utils.BaseAuth;
 import static dataObject.StatusCodesData.BED_REQUEST_400;
 import static dataObject.StatusCodesData.CREATED_201;
 import static dataObject.UserData.*;
-import static endpoints.AccountsPage.POST_ACCOUNT_USER;
 
 public class AccountsTest extends BaseAuth {
     @Test
@@ -25,7 +25,7 @@ public class AccountsTest extends BaseAuth {
                 .headers(headerConfig.getHeaders())
                 .body(requestBody.toString())
                 .when()
-                .post(POST_ACCOUNT_USER)
+                .post(Endpoint.Account_User)
                 .then()
                 .extract().response();
 
@@ -49,7 +49,7 @@ public class AccountsTest extends BaseAuth {
                 .headers(headerConfig.getHeaders())
                 .body(requestBody.toString())
                 .when()
-                .post(POST_ACCOUNT_USER)
+                .post(Endpoint.Account_User)
                 .then()
                 .extract().response();
 
