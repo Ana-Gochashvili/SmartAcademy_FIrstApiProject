@@ -1,7 +1,7 @@
 package lombok_tests;
 
 import dataObject.AlertsAndMessages;
-import dataObject.DataBuilder;
+import utils.DataBuilder;
 import endpoints.Endpoint;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

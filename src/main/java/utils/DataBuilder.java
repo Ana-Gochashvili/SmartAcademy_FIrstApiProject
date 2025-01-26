@@ -1,4 +1,4 @@
-package dataObject;
+package utils;
 
 import lombok.Builder;
 import lombok.Data;
