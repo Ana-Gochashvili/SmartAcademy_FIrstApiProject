@@ -1,5 +1,6 @@
 package api_tests;
 
+import endpoints.Endpoint;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -7,7 +8,6 @@ import org.testng.asserts.SoftAssert;
 import utils.BaseAuth;
 
 import static dataObject.StatusCodesData.SUCCESS_200;
-import static endpoints.BookStorePage.GET_BOOKS;
 
 public class BookStoreTest extends BaseAuth {
     @Test
@@ -15,7 +15,7 @@ public class BookStoreTest extends BaseAuth {
         Response response = RestAssured
                 .given()
                 .when()
-                .get(GET_BOOKS)
+                .get(Endpoint.BookStore_Book)
                 .then()
                 .extract().response();
 
